@@ -3,6 +3,7 @@ llama-index-llms-gemini
 llama-index-llms-replicate
 llama-index-readers-file
 llama-index-embeddings-huggingface
+llama-index-embeddings-openai
 psycopg2-binary
 sqlalchemy
 google-generativeai
