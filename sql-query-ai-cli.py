@@ -22,6 +22,7 @@ from typing import Optional
 from llama_index.core.query_engine import NLSQLTableQueryEngine
 from llama_index.core import SQLDatabase
 from llama_index.llms.gemini import Gemini
+from llama_index.embeddings.gemini import GeminiEmbedding
 from sqlalchemy import create_engine, text
 
 
@@ -132,7 +133,11 @@ class SQLQueryCLI:
             
             # Initialize LLM
             self.llm = Gemini(model="models/gemini-2.5-flash", temperature=0.7)
-            print("✓ Initialized Gemini LLM")
+            self.embed_model = GeminiEmbedding(
+                model_name="models/embedding-001", 
+                api_key=os.getenv("GEMINI_API_KEY")
+            )
+            print("✓ Initialized Gemini LLM and embedding model")
             
             # Create SQL database wrapper
             self.sql_database = SQLDatabase(self.engine)
@@ -163,7 +168,8 @@ class SQLQueryCLI:
             self.query_engine = NLSQLTableQueryEngine(
                 sql_database=self.sql_database,
                 tables=[target_table],
-                llm=self.llm
+                llm=self.llm,
+                embed_model=self.embed_model
             )
             
             print("✓ Natural language query engine initialized")
