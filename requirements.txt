@@ -1,0 +1,8 @@
+llama-index-core
+llama-index-llms-gemini
+llama-index-llms-replicate
+llama-index-readers-file
+llama-index-embeddings-huggingface
+psycopg2-binary
+sqlalchemy
+google-generativeai
